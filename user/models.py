@@ -72,3 +72,17 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = "email"
+
+
+class Profile(models.Model):
+    MALE = "M"
+    FEMALE = "F"
+    GENDER_CHOICES = ((MALE, "MALE"), (FEMALE, "FEMALE"))
+
+    user = models.OneToOneField(
+        "User", on_delete=models.CASCADE, related_name="profile"
+    )
+
+    gender = models.CharField(max_length=2, choices=GENDER_CHOICES, default=MALE)
+    location = models.CharField(max_length=30, blank=True, default="")
+    birth_date = models.DateField(null=True, blank=True)
