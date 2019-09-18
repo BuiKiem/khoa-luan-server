@@ -11,7 +11,9 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = get_user_model()
         fields = ("url", "email", "password")
-        extra_kwargs = {"password": {"write_only": True}}
+        extra_kwargs = {
+            "password": {"write_only": True, "style": {"input_type": "password"}}
+        }
 
     def create(self, validated_data):
         """Create a new user with encrypted password and return it."""
