@@ -17,7 +17,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     """Serializer for the User model"""
 
-    profile = ProfileSerializer()
+    profile = serializers.HyperlinkedIdentityField(view_name="user-profile")
 
     class Meta:
         model = get_user_model()
