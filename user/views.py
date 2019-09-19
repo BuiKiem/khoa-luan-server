@@ -15,19 +15,27 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=["GET"], serializer_class=ProfileSerializer)
     def profile(self, request: Request, pk: int = None):
+        del request, pk
+
         try:
             profile = self.get_object().profile
             serializer = ProfileSerializer(profile)
             return Response(serializer.data, status=status.HTTP_200_OK)
+
         except ObjectDoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
     @profile.mapping.patch
     def update_profile_partial(self, request: Request, pk: int = None):
+        del pk
+
         try:
             profile = self.get_object().profile
             serializer = ProfileSerializer(profile, data=request.data, partial=True)
             if serializer.is_valid():
                 serializer.save()
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
         except ObjectDoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
