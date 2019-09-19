@@ -15,7 +15,7 @@ class Country(models.Model):
         return "%s" % (self.name or self.code)
 
     def save(self, *args, **kwargs):
-        self.url = slugify(self.name)
+        self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
 
@@ -36,7 +36,7 @@ class City(models.Model):
             return f"{self.name}, {self.country.name}"
 
     def save(self, *args, **kwargs):
-        self.url = slugify(self.name)
+        self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
 
@@ -56,5 +56,5 @@ class District(models.Model):
         return f"{self.name}, {self.city.name}"
 
     def save(self, *args, **kwargs):
-        self.url = slugify(f"{self.name}-{self.id}")
+        self.slug = slugify(f"{self.name}-{self.city.name}")
         super().save(*args, **kwargs)
