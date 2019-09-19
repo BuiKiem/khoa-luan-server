@@ -58,3 +58,26 @@ class District(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(f"{self.name}-{self.city.name}")
         super().save(*args, **kwargs)
+
+
+class Address(models.Model):
+    address_line = models.CharField(max_length=100)
+    raw = models.CharField(max_length=200)
+
+    district = models.ForeignKey(
+        "District", related_name="addresses", on_delete=models.CASCADE
+    )
+
+    class Meta:
+        verbose_name_plural = "Adresses"
+        ordering = ("district", "address_line")
+
+    def __str__(self):
+        return self.raw
+
+    def save(self, *args, **kwargs):
+        district = self.district.name
+        city = self.district.city.name
+        country = self.district.city.country.name
+        self.raw = f"{self.address_line}, {district}, {city}, {country}"
+        super().save(*args, *kwargs)
