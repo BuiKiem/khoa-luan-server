@@ -3,28 +3,28 @@ from rest_framework import serializers
 from .models import Country, City, District
 
 
-class CountrySerializer(serializers.ModelSerializer):
+class CountrySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Country
-        fields = ("name", "code", "slug")
+        fields = ("url", "name", "code", "slug")
         extra_kwargs = {"slug": {"read_only": True}}
 
 
-class CitySerializer(serializers.ModelSerializer):
+class CitySerializer(serializers.HyperlinkedModelSerializer):
     country = serializers.SlugRelatedField(
         queryset=Country.objects.all(), slug_field="name"
     )
 
     class Meta:
         model = City
-        fields = ("name", "country", "slug")
+        fields = ("url", "name", "country", "slug")
         extra_kwargs = {"slug": {"read_only": True}}
 
 
-class DistrictSerializer(serializers.ModelSerializer):
+class DistrictSerializer(serializers.HyperlinkedModelSerializer):
     city = serializers.SlugRelatedField(queryset=City.objects.all(), slug_field="name")
 
     class Meta:
         model = District
-        fields = ("name", "city", "slug")
+        fields = ("url", "name", "city", "slug")
         extra_kwargs = {"slug": {"read_only": True}}
