@@ -5,7 +5,7 @@ from django.utils.text import slugify
 class Country(models.Model):
     name = models.CharField(max_length=40, unique=True)
     code = models.CharField(max_length=2)
-    url = models.SlugField(unique=True)
+    slug = models.SlugField(unique=True)
 
     class Meta:
         verbose_name_plural = "Countries"
@@ -21,7 +21,7 @@ class Country(models.Model):
 
 class City(models.Model):
     name = models.CharField(max_length=50, unique=True)
-    url = models.SlugField(unique=True)
+    slug = models.SlugField(unique=True)
 
     country = models.ForeignKey(
         "Country", on_delete=models.CASCADE, related_name="cities", null=False
@@ -42,7 +42,7 @@ class City(models.Model):
 
 class District(models.Model):
     name = models.CharField(max_length=50)
-    url = models.SlugField(unique=True)
+    slug = models.SlugField(unique=True)
 
     city = models.ForeignKey(
         "City", on_delete=models.CASCADE, related_name="districts", null=False
