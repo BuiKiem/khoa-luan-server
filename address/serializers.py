@@ -19,6 +19,6 @@ class CitySerializer(serializers.ModelSerializer):
 
 class DistrictSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Country
+        model = District
         fields = ("name", "city__name", "slug")
         extra_kwargs = {"slug": {"read_only": True}}
