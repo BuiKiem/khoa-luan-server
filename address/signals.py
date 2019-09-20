@@ -1,4 +1,3 @@
-from typing import Callable
 from django.dispatch import receiver
 from django.db.models.signals import pre_save
 from .models import Address
