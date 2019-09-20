@@ -5,6 +5,8 @@ from django.contrib.auth.models import (
     PermissionsMixin,
 )
 
+from address.models import Address
+
 
 class UserManager(BaseUserManager):
     """The Manager class used for the custom User class."""
@@ -84,5 +86,11 @@ class Profile(models.Model):
     )
 
     gender = models.CharField(max_length=2, choices=GENDER_CHOICES, default=MALE)
-    location = models.CharField(max_length=30, blank=True, default="")
+    address = models.ForeignKey(
+        Address,
+        related_name="user_profile",
+        on_delete=models.CASCADE,
+        default=None,
+        null=True,
+    )
     birth_date = models.DateField(null=True, blank=True)
