@@ -25,8 +25,8 @@ class UserViewSet(viewsets.ModelViewSet):
         except ObjectDoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
-    @profile.mapping.patch
-    def update_profile_partial(self, request: Request, pk: int = None):
+    @profile.mapping.put
+    def update_profile(self, request: Request, pk: int = None):
         del pk
 
         try:
