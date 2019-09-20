@@ -1,11 +1,12 @@
-from django.core.exceptions import ObjectDoesNotExist
-from rest_framework import viewsets, status
-from rest_framework.decorators import action
-from rest_framework.request import Request
-from rest_framework.response import Response
+from rest_framework import viewsets
 
-from .models import Country, City, District
-from .serializers import CountrySerializer, CitySerializer, DistrictSerializer
+from .models import Country, City, District, Address
+from .serializers import (
+    CountrySerializer,
+    CitySerializer,
+    DistrictSerializer,
+    AddressSerializer,
+)
 
 
 class CountryViewSet(viewsets.ModelViewSet):
@@ -21,3 +22,8 @@ class CityViewSet(viewsets.ModelViewSet):
 class DistrictViewSet(viewsets.ModelViewSet):
     queryset = District.objects.all()
     serializer_class = DistrictSerializer
+
+
+class AddressViewSet(viewsets.ModelViewSet):
+    queryset = Address.objects.all()
+    serializer_class = AddressSerializer

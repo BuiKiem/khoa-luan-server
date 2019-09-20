@@ -74,10 +74,3 @@ class Address(models.Model):
 
     def __str__(self):
         return self.raw
-
-    def save(self, *args, **kwargs):
-        district = self.district.name
-        city = self.district.city.name
-        country = self.district.city.country.name
-        self.raw = f"{self.address_line}, {district}, {city}, {country}"
-        super().save(*args, *kwargs)
