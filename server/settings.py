@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # Project apps
     "user.apps.UserConfig",
     "address.apps.AddressConfig",
+    "accommodation.apps.AccommodationConfig",
 ]
 
 MIDDLEWARE = [
