@@ -16,6 +16,6 @@ accommodation_router.register(
 accommodation_router.register(
     r"accommodations", AccommodationViewSet, basename="accommodation"
 )
-accommodation_router.register(r"room-types", RoomTypeViewSet, basename="room-type")
+accommodation_router.register(r"room-types", RoomTypeViewSet, basename="roomtype")
 accommodation_router.register(r"rooms", RoomViewSet, basename="room")
 accommodation_router.register(r"bookings", BookingViewSet, basename="booking")
